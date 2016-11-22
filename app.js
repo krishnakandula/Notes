@@ -1,15 +1,34 @@
 console.log('Starting app.js');
 
 const fs = require('fs');
-const os = require('os');
 const _ = require('lodash');
+const yargs = require('yargs');
+
+//Local modules
 const notes = require('./notes.js');
 
-//console.log(_.isString(true));
-//console.log(_.isString('krishna'));
-var filteredArray = _.uniq(['Krishna', 'Krishna', 1]);
-console.log(filteredArray);
+const argv = yargs.argv;
+let command = process.argv[2];
+console.log('Command: ', command);
+console.log('Yargs:', argv);
 
-//console.log('Result:', notes.add(1, 2));
-//var user = os.userInfo('username');
-//fs.appendFile('greetings.txt', `Hello ${user.username}!, you are ${notes.age}`);
+if(command === 'add'){
+	let note = notes.addNote(argv.title, argv.body);
+	if(note) {
+		console.log('Note created');
+		console.log('--');
+		console.log('Title: ${note.title}');
+		console.log('Body: ${note.body}');
+
+	} else {
+		console.log('Note already exists');
+	}
+} else if (command === 'list'){
+	notes.getAll();
+} else if (command === 'read'){
+	notes.getNote(argv.title);
+} else if (command === 'remove'){
+	notes.removeNote(argv.title);
+} else {
+	console.log('Command not recognized');
+}
