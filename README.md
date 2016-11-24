@@ -12,8 +12,18 @@ node app.js add --title=
 	```
 	node app.js add --title=' ' --body=' '
 	```
-2. read
-	Prints out the contents of a note given the title.
+2. read  
+	Prints out the contents of a note given the title.  
 	```
 	node app.js read --title=' '
+	```
+3. list  
+	Prints a list of all the stored notes.  
+	```
+	node app.js list
+	```
+4. remove  
+	Removes a node from the list given the title.  
+	```
+	node app.js remove --title=' '
 	```
